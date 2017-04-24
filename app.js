@@ -19,14 +19,12 @@ function addView(viewFunc) {
   viewFunc(defaultState);
 }
 
-addView((state) => {
-  console.log(`There are ${state.courses.length} courses in the library`);
+addView((s) => {
+  console.log(`There are ${s.courses.length} courses in the library`);
 });
 
-addView((state) => {
-  console.log(`The latest course in the library: ${state.courses[state.courses.length -1].name}`);
+addView((s) => {
+  console.log(`The latest course in the library: ${s.courses[s.courses.length -1].name}`);
 });
-
-
 
 
