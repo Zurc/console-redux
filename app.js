@@ -1,4 +1,5 @@
-import { createStore } from 'redux';
+// import { createStore } from 'redux';   // ES6 syntax
+const { createStore } = require('redux');
 
 const defaultState = {
   courses: [
@@ -27,6 +28,11 @@ var store = createStore(reducer, defaultState);
 
 function addView(viewFunc) {
   viewFunc(defaultState);
+  // subscribe on your view to the state changes
+  store.subscribe(() => {
+    // calls the view with the latest state from the store
+    viewFunc(store.getState());
+  });
 }
 
 addView((s) => {
@@ -37,7 +43,16 @@ addView((s) => {
   console.log(`The latest course in the library: ${s.courses[s.courses.length -1].name}`);
 });
 
-defaultState.courses.push({
-  name: 'this is a new course',
-  topic: 'Really does not matter'
+// defaultState.courses.push({
+//   name: 'this is a new course',
+//   topic: 'Really does not matter'
+// })
+
+// dispatch an action to the store
+store.dispatch({
+  type: 'ADD_COURSE', 
+  course: {
+    name: 'this is a new course',
+    topic: 'Really does not matter'
+  }
 })
