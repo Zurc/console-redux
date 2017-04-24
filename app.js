@@ -27,4 +27,7 @@ addView((s) => {
   console.log(`The latest course in the library: ${s.courses[s.courses.length -1].name}`);
 });
 
-
+defaultState.courses.push({
+  name: 'this is a new course',
+  topic: 'Really does not matter'
+})
