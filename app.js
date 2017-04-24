@@ -1,5 +1,5 @@
 // import { createStore } from 'redux';   // ES6 syntax
-const { createStore } = require('redux');
+const { createStore, applyMiddleware } = require('redux');
 
 const defaultState = {
   courses: [
@@ -18,6 +18,13 @@ const defaultState = {
   ]
 };
 
+const logger = store => next => action => {
+  console.log('Dispatching ', action);
+  let result = next(action);
+  console.log('state after action ', store.getState());
+  return result;
+}
+
 // create reducer function and pass state and action. initially it will return state
 function reducer(state, action) {
   switch(action.type){
@@ -31,7 +38,7 @@ function reducer(state, action) {
 }
 
 // define store and pass reducer function and our current state
-var store = createStore(reducer, defaultState);
+var store = createStore(reducer, defaultState, applyMiddleware(logger));
 
 function addView(viewFunc) {
   viewFunc(defaultState);
