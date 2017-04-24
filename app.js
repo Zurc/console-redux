@@ -1,3 +1,5 @@
+import { createStore } from 'redux';
+
 const defaultState = {
   courses: [
     {
@@ -14,6 +16,14 @@ const defaultState = {
     }
   ]
 };
+
+// create reducer function and pass state and action. initially it will return state
+function reducer(state, action) {
+  return state
+}
+
+// define store and pass reducer function and our current state
+var store = createStore(reducer, defaultState);
 
 function addView(viewFunc) {
   viewFunc(defaultState);
