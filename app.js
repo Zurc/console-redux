@@ -20,7 +20,14 @@ const defaultState = {
 
 // create reducer function and pass state and action. initially it will return state
 function reducer(state, action) {
-  return state
+  switch(action.type){
+    case 'ADD_COURSE':
+      return Object.assign({}, state, {
+        courses: [...state.courses, action.course]
+      });
+    default: 
+      return state
+  }
 }
 
 // define store and pass reducer function and our current state
@@ -35,12 +42,12 @@ function addView(viewFunc) {
   });
 }
 
-addView((s) => {
-  console.log(`There are ${s.courses.length} courses in the library`);
+addView((state) => {
+  console.log(`There are ${state.courses.length} courses in the library`);
 });
 
-addView((s) => {
-  console.log(`The latest course in the library: ${s.courses[s.courses.length -1].name}`);
+addView((state) => {
+  console.log(`The latest course in the library: ${state.courses[state.courses.length -1].name}`);
 });
 
 // defaultState.courses.push({
